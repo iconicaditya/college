@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
   BookOpen,
@@ -14,7 +14,7 @@ import {
   GraduationCap,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { CUSTOMER_SESSION_KEY } from "@/lib/customer-auth";
+import { signOutCustomer } from "@/lib/auth";
 
 const NAV_ITEMS = [
   { label: "Overview", href: "/customer", icon: LayoutDashboard },
@@ -41,13 +41,7 @@ function SidebarContent({
   forceFull?: boolean;
 }) {
   const pathname = usePathname();
-  const router = useRouter();
   const isCollapsed = forceFull ? false : collapsed;
-
-  const logout = () => {
-    sessionStorage.removeItem(CUSTOMER_SESSION_KEY);
-    router.replace("/customer/login");
-  };
 
   return (
     <div className="flex flex-col h-full">
@@ -147,7 +141,7 @@ function SidebarContent({
           {!isCollapsed && <span>View Site</span>}
         </Link>
         <button
-          onClick={logout}
+          onClick={signOutCustomer}
           className={cn(
             "w-full flex items-center gap-3 rounded-none text-sm font-medium text-slate-400 hover:bg-red-500/15 hover:text-red-400 transition-colors",
             isCollapsed ? "justify-center px-0 py-2.5 mx-1" : "px-3 py-2.5"

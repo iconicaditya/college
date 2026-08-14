@@ -1,10 +1,10 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Bell, Search, ChevronDown, Menu, ExternalLink, LogOut } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
-import { CUSTOMER_SESSION_KEY } from "@/lib/customer-auth";
+import { signOutCustomer } from "@/lib/auth";
 
 const PAGE_META: Record<string, { title: string; subtitle: string }> = {
   "/customer": { title: "Overview", subtitle: "Welcome back, Student 👋" },
@@ -22,14 +22,8 @@ interface TopbarProps {
 
 export default function CustomerTopbar({ onMenuClick, onToggleSidebar }: TopbarProps) {
   const pathname = usePathname();
-  const router = useRouter();
   const [showDropdown, setShowDropdown] = useState(false);
   const meta = PAGE_META[pathname] ?? { title: "Dashboard", subtitle: "" };
-
-  const signOut = () => {
-    sessionStorage.removeItem(CUSTOMER_SESSION_KEY);
-    router.replace("/customer/login");
-  };
 
   return (
     <header className="h-16 bg-white border-b border-slate-200 flex items-center justify-between gap-2 px-3 sm:px-6 flex-shrink-0 sticky top-0 z-30">
@@ -123,7 +117,7 @@ export default function CustomerTopbar({ onMenuClick, onToggleSidebar }: TopbarP
                 </Link>
                 <hr className="my-1 border-slate-100" />
                 <button
-                  onClick={signOut}
+                  onClick={signOutCustomer}
                   className="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-500 hover:bg-red-50 transition-colors"
                 >
                   <LogOut size={13} /> Sign Out

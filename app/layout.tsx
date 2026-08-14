@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Manrope, Inter } from "next/font/google";
 import "./globals.css";
 import TabBarApplier from "@/components/TabBarApplier";
+import NextAuthProvider from "@/components/NextAuthProvider";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -35,8 +36,10 @@ export default function RootLayout({
       <body
         className={`${manrope.variable} ${inter.variable} antialiased bg-white text-[#111827]`}
       >
-        <TabBarApplier />
-        {children}
+        <NextAuthProvider>
+          <TabBarApplier />
+          {children}
+        </NextAuthProvider>
       </body>
     </html>
   );

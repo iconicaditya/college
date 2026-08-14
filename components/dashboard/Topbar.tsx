@@ -1,10 +1,10 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Bell, Search, ChevronDown, Menu, ExternalLink, LogOut } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
-import { ADMIN_SESSION_KEY } from "@/lib/admin-auth";
+import { signOut } from "@/lib/auth";
 
 const PAGE_META: Record<string, { title: string; subtitle: string }> = {
   "/admin": { title: "Overview", subtitle: "Welcome back, Super Admin 👋" },
@@ -34,14 +34,8 @@ interface TopbarProps {
 
 export default function Topbar({ onMenuClick, onToggleSidebar }: TopbarProps) {
   const pathname = usePathname();
-  const router = useRouter();
   const [showDropdown, setShowDropdown] = useState(false);
   const meta = PAGE_META[pathname] ?? { title: "Dashboard", subtitle: "" };
-
-  const signOut = () => {
-    sessionStorage.removeItem(ADMIN_SESSION_KEY);
-    router.replace("/admin/login");
-  };
 
   return (
     <header className="h-16 bg-white border-b border-slate-200 flex items-center justify-between gap-2 px-3 sm:px-6 flex-shrink-0 sticky top-0 z-30">

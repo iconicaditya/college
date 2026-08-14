@@ -25,8 +25,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { ADMIN_SESSION_KEY } from "@/lib/admin-auth";
-import { useRouter } from "next/navigation";
+import { signOut } from "@/lib/auth";
 
 const NAV_ITEMS = [
   { label: "Overview", href: "/admin", icon: LayoutDashboard },
@@ -66,13 +65,7 @@ function SidebarContent({
   forceFull?: boolean;
 }) {
   const pathname = usePathname();
-  const router = useRouter();
   const isCollapsed = forceFull ? false : collapsed;
-
-  const logout = () => {
-    sessionStorage.removeItem(ADMIN_SESSION_KEY);
-    router.replace("/admin/login");
-  };
 
   return (
     <div className="flex flex-col h-full">
@@ -161,7 +154,7 @@ function SidebarContent({
           {!isCollapsed && <span>View Site</span>}
         </Link>
         <button
-          onClick={logout}
+          onClick={signOut}
           className={cn(
             "w-full flex items-center gap-3 rounded-none text-sm font-medium text-slate-400 hover:bg-red-500/15 hover:text-red-400 transition-colors",
             isCollapsed ? "justify-center px-0 py-2.5 mx-1" : "px-3 py-2.5"

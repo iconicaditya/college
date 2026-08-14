@@ -1,29 +1,44 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import { Eye, EyeOff, LockKeyhole, UserRound, GraduationCap } from "lucide-react";
+import { Eye, EyeOff, LockKeyhole, ShieldCheck, UserRound, GraduationCap } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { CUSTOMER_SESSION_KEY, isValidCustomerCredential } from "@/lib/customer-auth";
+import { useSession, signIn } from "next-auth/react";
+import { useCurrentUser } from "@/lib/auth";
 
-export default function CustomerLoginPage() {
+export default function LoginPage() {
   const router = useRouter();
+  const { status } = useSession();
+  const user = useCurrentUser();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
+  // If already signed in, send the user to the correct dashboard.
   useEffect(() => {
-    if (sessionStorage.getItem(CUSTOMER_SESSION_KEY) === "authenticated") router.replace("/customer");
-  }, [router]);
+    if (status === "authenticated" && user) {
+      router.replace(user.dashboardRoute);
+    }
+  }, [status, user, router]);
 
-  const handleSubmit = (event: FormEvent) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    if (!isValidCustomerCredential(username, password)) {
+    setLoading(true);
+    setError("");
+    const res = await signIn("credentials", {
+      username,
+      password,
+      redirect: false,
+    });
+    setLoading(false);
+    if (res && res.error) {
       setError("The username or password is incorrect.");
       return;
     }
-    sessionStorage.setItem(CUSTOMER_SESSION_KEY, "authenticated");
-    router.replace("/customer");
+    // NextAuth session will update via the provider; the effect above
+    // routes to the correct dashboard based on role.
   };
 
   return (
@@ -35,21 +50,21 @@ export default function CustomerLoginPage() {
           <div>
             <div className="grid h-11 w-11 place-items-center rounded-2xl bg-white text-lg font-black text-indigo-700">N</div>
             <p className="mt-8 text-xs font-bold uppercase tracking-[.2em] text-indigo-200">National Multiple College</p>
-            <h1 className="mt-3 font-[family-name:var(--font-manrope)] text-4xl font-extrabold leading-tight">Your student portal.</h1>
-            <p className="mt-5 max-w-sm text-sm leading-6 text-indigo-100">Explore programs, view campus events, submit enquiries, and manage your documents.</p>
+            <h1 className="mt-3 font-[family-name:var(--font-manrope)] text-4xl font-extrabold leading-tight">The control center for your digital campus.</h1>
+            <p className="mt-5 max-w-sm text-sm leading-6 text-indigo-100">Manage content, programs, events, enquiries, and student resources from a secured administration workspace.</p>
           </div>
           <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
-            <GraduationCap size={20} className="text-indigo-200" />
-            <p className="mt-3 text-sm font-bold">Customer account</p>
-            <p className="mt-1 text-xs leading-5 text-indigo-100">Sign in to access the student portal and campus resources.</p>
+            <ShieldCheck size={20} className="text-indigo-200" />
+            <p className="mt-3 text-sm font-bold">Super Admin & Customer access</p>
+            <p className="mt-1 text-xs leading-5 text-indigo-100">Sign in with your role credentials — {"you'll"} be routed to the correct dashboard automatically.</p>
           </div>
         </div>
         <div className="flex min-h-[610px] flex-col justify-center p-7 sm:p-12">
           <div className="mb-8">
             <div className="grid h-10 w-10 place-items-center rounded-xl bg-indigo-600 text-sm font-black text-white lg:hidden">N</div>
-            <p className="mt-4 text-[11px] font-extrabold uppercase tracking-[.18em] text-indigo-600">Customer access</p>
+            <p className="mt-4 text-[11px] font-extrabold uppercase tracking-[.18em] text-indigo-600">Secure access</p>
             <h2 className="mt-2 font-[family-name:var(--font-manrope)] text-3xl font-extrabold tracking-tight text-slate-950">Sign in to NMC Portal</h2>
-            <p className="mt-2 text-sm leading-6 text-slate-500">Use your customer account to continue.</p>
+            <p className="mt-2 text-sm leading-6 text-slate-500">Use your account credentials to continue.</p>
           </div>
           <form onSubmit={handleSubmit} className="space-y-5">
             <label className="block text-xs font-bold text-slate-700">
@@ -70,11 +85,29 @@ export default function CustomerLoginPage() {
               </div>
             </label>
             {error && <p role="alert" className="rounded-xl bg-rose-50 px-3 py-2.5 text-xs font-semibold text-rose-600">{error}</p>}
-            <button className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 text-sm font-bold text-white shadow-lg shadow-indigo-600/25 transition hover:bg-indigo-700">
-              Sign in <GraduationCap size={17} />
+            <button className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 text-sm font-bold text-white shadow-lg shadow-indigo-600/25 transition hover:bg-indigo-700 disabled:opacity-60" disabled={loading}>
+              <ShieldCheck size={17} /> {loading ? "Signing in…" : "Sign in securely"}
             </button>
           </form>
-          <p className="mt-8 text-center text-[11px] leading-5 text-slate-400">Frontend-only demonstration credential gate.</p>
+          <div className="mt-6 rounded-xl border border-slate-200 bg-slate-50 p-4">
+            <p className="text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-2">Demo accounts</p>
+            <div className="grid grid-cols-2 gap-3 text-[11px] text-slate-600">
+              <div className="flex items-center gap-2">
+                <ShieldCheck size={14} className="text-indigo-600" />
+                <div>
+                  <p className="font-bold">superadmin</p>
+                  <p className="text-slate-400">Nepal!@#$1234</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <GraduationCap size={14} className="text-indigo-600" />
+                <div>
+                  <p className="font-bold">user</p>
+                  <p className="text-slate-400">Nepal@1234</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </main>

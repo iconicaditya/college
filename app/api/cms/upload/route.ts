@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { randomUUID } from "crypto";
-import { uploadFile, isGithubCmsConfigured } from "@/lib/cms-store";
+import { uploadCmsFile } from "@/lib/cms/dataService";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -26,8 +26,7 @@ const EXT_BY_TYPE: Record<string, string> = {
 /**
  * Max upload size. 25 MB keeps us well under GitHub's 100 MB file
  * limit and Vercel's 4.5 MB serverless body limit (local dev has no
- * such cap so this only matters on the deployed route). The route
- * short-circuits earlier on Vercel.
+ * such cap so this only matters on the deployed route).
  */
 const MAX_UPLOAD_BYTES = 25 * 1024 * 1024;
 
@@ -63,29 +62,23 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (process.env.VERCEL && !isGithubCmsConfigured()) {
+    // Route through the dataService adapter: shared sections → Cloudinary
+    // (when configured), otherwise GitHub/local.
+    const result = await uploadCmsFile(
+      buffer.toString("base64"),
+      filename,
+      safeFolder
+    );
+    if (!result.ok || !result.url) {
       return NextResponse.json(
-        {
-          error:
-            "GitHub-as-CMS is not configured. Set CMS_GITHUB_TOKEN and CMS_GITHUB_REPO in the Vercel env vars so uploads can commit to the repo.",
-        },
-        { status: 503 }
-      );
-    }
-
-    const result = await uploadFile(safeFolder, filename, buffer, f.type);
-    if (!result.ok) {
-      return NextResponse.json(
-        { error: result.error },
+        { error: result.error || "Upload failed" },
         { status: 500 }
       );
     }
     return NextResponse.json({
       url: result.url,
-      mode: result.mode,
       size: buffer.byteLength,
       mime: f.type,
-      commitUrl: result.commitUrl,
     });
   } catch (error) {
     return NextResponse.json(
