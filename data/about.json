@@ -1,0 +1,38 @@
+{
+  "eyebrow": "About National Multiple College",
+  "title": "Nepal's Trusted",
+  "titleHighlight": "Technical Institute",
+  "titleSuffix": "Since 1996",
+  "paragraph1": "National Multiple College (NMC) is a premier CTEVT-affiliated technical institution committed to delivering practical, industry-relevant education in engineering, information technology, and health science.",
+  "paragraph2": "With over 28 years of academic excellence, NMC has produced thousands of skilled graduates serving Nepal's development across construction, technology, healthcare, and beyond. Our hands-on training model and dedicated faculty ensure every graduate is job-ready from day one.",
+  "image": "/uploads/about/1785425501317-4af604ed.jpg",
+  "imageAlt": "Students at National Multiple College",
+  "badgeValue": "1996",
+  "badgeLabel": "Year of Establishment",
+  "bullets": [
+    {
+      "id": "ab1",
+      "label": "Alumni Network",
+      "value": "3,500+",
+      "enabled": true
+    },
+    {
+      "id": "ab2",
+      "label": "Industry Partners",
+      "value": "60+",
+      "enabled": true
+    },
+    {
+      "id": "ab3",
+      "label": "Scholarship Recipients",
+      "value": "200+/yr",
+      "enabled": true
+    },
+    {
+      "id": "ab4",
+      "label": "Placement Rate",
+      "value": "95%+",
+      "enabled": true
+    }
+  ]
+}

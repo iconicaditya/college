@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #111827;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --secondary-accent: #0ea5e9;
+  --highlight: #f59e0b;
+  --dark: #0f172a;
+  --text-primary: #111827;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
+  --bg-secondary: #f8fafc;
+  --bg-alternate: #f1f5f9;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  * {
+    @apply border-[#e2e8f0];
+    box-sizing: border-box;
+  }
+  body {
+    @apply bg-white text-[#111827] antialiased;
+    font-family: var(--font-inter), sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-manrope), sans-serif;
+    font-style: normal;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .section-padding {
+    @apply py-20 px-4 sm:px-6 lg:px-8;
+  }
+  .container-max {
+    @apply max-w-[1280px] mx-auto;
+  }
+}
+
+/* Smooth infinite ticker marquee */
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-ticker {
+  display: flex;
+  width: max-content;
+  animation: ticker 32s linear infinite;
+}
+.animate-ticker:hover {
+  animation-play-state: paused;
+}

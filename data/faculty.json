@@ -1,0 +1,13 @@
+{
+  "eyebrow": "Our Faculty",
+  "heading": "Learn from Experienced Professionals",
+  "description": "Our 80+ faculty members are qualified engineers, technical experts, and industry practitioners dedicated to your growth.",
+  "buttonLabel": "Meet All Faculty",
+  "buttonHref": "#faculty",
+  "members": [
+    { "id": "fa1", "name": "Er. Ramesh Kumar Shrestha", "title": "Head of Department", "department": "Computer Engineering", "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80&auto=format&fit=crop&crop=face", "imageAlt": "Portrait of Er. Ramesh Kumar Shrestha", "rating": 4.9, "enabled": true },
+    { "id": "fa2", "name": "Er. Sita Devi Adhikari", "title": "Senior Lecturer", "department": "Civil Engineering", "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80&auto=format&fit=crop&crop=face", "imageAlt": "Portrait of Er. Sita Devi Adhikari", "rating": 4.8, "enabled": true },
+    { "id": "fa3", "name": "Er. Bikash Raj Paudel", "title": "Lab Instructor", "department": "Electrical Engineering", "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80&auto=format&fit=crop&crop=face", "imageAlt": "Portrait of Er. Bikash Raj Paudel", "rating": 4.7, "enabled": true },
+    { "id": "fa4", "name": "Ms. Anita Maharjan", "title": "Health Science Coordinator", "department": "Health Assistant", "image": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&q=80&auto=format&fit=crop&crop=face", "imageAlt": "Portrait of Ms. Anita Maharjan", "rating": 4.9, "enabled": true }
+  ]
+}

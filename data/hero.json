@@ -1,0 +1,134 @@
+{
+  "eyebrow": "Admissions Open — 2081/82 Academic Session",
+  "heading": "Your Gateway to Technical Excellence",
+  "headingHighlight": "Technical",
+  "subheading": "National Multiple College — Affiliated to CTEVT",
+  "description": "Join 3,500+ students pursuing industry-ready Diploma and Certificate programs in Engineering, IT, and Health Science at Nepal's leading CTEVT-affiliated technical college.",
+  "primaryCta": {
+    "label": "Explore Programs",
+    "href": "#programs",
+    "enabled": true
+  },
+  "secondaryCta": {
+    "label": "Apply Now",
+    "href": "#admissions",
+    "enabled": true
+  },
+  "trustFacts": [
+    {
+      "id": "tf1",
+      "label": "CTEVT Affiliated",
+      "value": "Govt. Approved",
+      "enabled": true
+    },
+    {
+      "id": "tf2",
+      "label": "Scholarship Available",
+      "value": "Merit-Based",
+      "enabled": true
+    },
+    {
+      "id": "tf3",
+      "label": "On-the-Job Training",
+      "value": "Included",
+      "enabled": true
+    }
+  ],
+  "slides": [
+    {
+      "id": "s1",
+      "src": "/uploads/hero/1785418794497-3c51c8bc.png",
+      "alt": "National Multiple College campus",
+      "label": "World-Class Campus",
+      "kenBurns": {
+        "initial": {
+          "scale": 1,
+          "x": "0%",
+          "y": "0%"
+        },
+        "animate": {
+          "scale": 1.14,
+          "x": "-2%",
+          "y": "-1.5%"
+        }
+      },
+      "enabled": true
+    },
+    {
+      "id": "s2",
+      "src": "/uploads/hero/1785418799144-e2f65dbe.jpg",
+      "alt": "Students studying at NMC",
+      "label": "Student-Centered Learning",
+      "kenBurns": {
+        "initial": {
+          "scale": 1.14,
+          "x": "-2%",
+          "y": "-1%"
+        },
+        "animate": {
+          "scale": 1,
+          "x": "0%",
+          "y": "0%"
+        }
+      },
+      "enabled": true
+    },
+    {
+      "id": "s3",
+      "src": "/uploads/hero/1785418809033-50340dee.jpg",
+      "alt": "NMC graduation ceremony",
+      "label": "Celebrating Excellence",
+      "kenBurns": {
+        "initial": {
+          "scale": 1,
+          "x": "2%",
+          "y": "1.5%"
+        },
+        "animate": {
+          "scale": 1.14,
+          "x": "0%",
+          "y": "-1%"
+        }
+      },
+      "enabled": true
+    },
+    {
+      "id": "s4",
+      "src": "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1920&q=85&auto=format&fit=crop",
+      "alt": "Modern classroom at NMC",
+      "label": "Modern Technical Education",
+      "kenBurns": {
+        "initial": {
+          "scale": 1.14,
+          "x": "0%",
+          "y": "1%"
+        },
+        "animate": {
+          "scale": 1,
+          "x": "-2%",
+          "y": "0%"
+        }
+      },
+      "enabled": true
+    },
+    {
+      "id": "s5",
+      "src": "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1920&q=85&auto=format&fit=crop",
+      "alt": "NMC library and research",
+      "label": "Research & Innovation",
+      "kenBurns": {
+        "initial": {
+          "scale": 1,
+          "x": "-1.5%",
+          "y": "2%"
+        },
+        "animate": {
+          "scale": 1.14,
+          "x": "1%",
+          "y": "0%"
+        }
+      },
+      "enabled": true
+    }
+  ]
+}

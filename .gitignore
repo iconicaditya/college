@@ -1,0 +1,10 @@
+node_modules
+.next
+.env*
+!.env.example
+.DS_Store
+*.local
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+tsconfig.tsbuildinfo

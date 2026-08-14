@@ -1,0 +1,36 @@
+{
+  "items": [
+    {
+      "id": "s1",
+      "label": "Enrolled Students",
+      "value": 3011,
+      "suffix": "+",
+      "iconKey": "Users",
+      "enabled": true
+    },
+    {
+      "id": "s2",
+      "label": "Technical Programs",
+      "value": 20,
+      "suffix": "+",
+      "iconKey": "BookOpen",
+      "enabled": true
+    },
+    {
+      "id": "s3",
+      "label": "Qualified Faculty",
+      "value": 80,
+      "suffix": "+",
+      "iconKey": "GraduationCap",
+      "enabled": true
+    },
+    {
+      "id": "s4",
+      "label": "Years of Excellence",
+      "value": 28,
+      "suffix": "+",
+      "iconKey": "Award",
+      "enabled": true
+    }
+  ]
+}

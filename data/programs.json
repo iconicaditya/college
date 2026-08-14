@@ -1,0 +1,15 @@
+{
+  "eyebrow": "CTEVT Programs",
+  "heading": "Diploma and Certificate Programs",
+  "description": "All programs are approved by CTEVT and designed to deliver practical, career-focused training that meets national and international industry standards.",
+  "buttonLabel": "View All Programs",
+  "buttonHref": "#programs",
+  "cards": [
+    { "id": "p1", "title": "Diploma in Computer Engineering", "desc": "Three-year CTEVT diploma covering programming, networking, database systems, and software development.", "iconKey": "Laptop", "badge": "Most Popular", "badgeColor": "#2563eb", "enabled": true },
+    { "id": "p2", "title": "Diploma in Civil Engineering", "desc": "Comprehensive training in structural design, surveying, construction management, and AutoCAD.", "iconKey": "Building2", "badge": "High Demand", "badgeColor": "#0ea5e9", "enabled": true },
+    { "id": "p3", "title": "Diploma in Electrical Engineering", "desc": "Covers power systems, electrical installation, industrial wiring, and renewable energy technologies.", "iconKey": "Zap", "badge": "", "badgeColor": "", "enabled": true },
+    { "id": "p4", "title": "Diploma in Electronics & Communication", "desc": "Telecommunications, digital electronics, microprocessors, and communication systems.", "iconKey": "Globe2", "badge": "", "badgeColor": "", "enabled": true },
+    { "id": "p5", "title": "Diploma in Architecture", "desc": "Architectural drawing, building design, sustainable construction, and interior planning.", "iconKey": "FlaskConical", "badge": "New Intake", "badgeColor": "#f59e0b", "enabled": true },
+    { "id": "p6", "title": "Diploma in Health Assistant", "desc": "Primary healthcare, community health, clinical practice, and emergency medical response.", "iconKey": "HeartHandshake", "badge": "", "badgeColor": "", "enabled": true }
+  ]
+}

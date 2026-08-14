@@ -1,0 +1,14 @@
+{
+  "badge": "Admissions Closing Soon \u2014 2081/82 Session",
+  "heading": "Begin Your Technical Career at NMC",
+  "description": "Enroll in Nepal's trusted CTEVT-affiliated college and gain the practical skills, recognized qualification, and industry connections that employers demand. Limited seats \u2014 apply today.",
+  "primaryCtaLabel": "Apply for Admission",
+  "primaryCtaHref": "#contact",
+  "secondaryCtaLabel": "View Programs",
+  "secondaryCtaHref": "#programs",
+  "facts": [
+    { "id": "af1", "label": "Merit Scholarships Per Year", "value": "200+", "enabled": true },
+    { "id": "af2", "label": "Application Deadline", "value": "Bhadra 2081", "enabled": true },
+    { "id": "af3", "label": "CTEVT Approved Programs", "value": "20+", "enabled": true }
+  ]
+}

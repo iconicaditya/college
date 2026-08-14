@@ -1,0 +1,163 @@
+"use client";
+
+import { usePathname, useRouter } from "next/navigation";
+import { Bell, Search, ChevronDown, Menu, ExternalLink, LogOut } from "lucide-react";
+import { useState } from "react";
+import Link from "next/link";
+import { ADMIN_SESSION_KEY } from "@/lib/admin-auth";
+
+const PAGE_META: Record<string, { title: string; subtitle: string }> = {
+  "/admin": { title: "Overview", subtitle: "Welcome back, Super Admin 👋" },
+  "/admin/tab-bar": { title: "Tab Bar", subtitle: "Browser tab favicon & page title" },
+  "/admin/navbar": { title: "Navbar", subtitle: "Configure the top navigation bar" },
+  "/admin/hero": { title: "Hero", subtitle: "Configure the hero / intro section" },
+  "/admin/stats": { title: "Statistics", subtitle: "Animated counter cards" },
+  "/admin/about": { title: "About", subtitle: "Configure the About section" },
+  "/admin/programs": { title: "Programs", subtitle: "CTEVT program cards & badges" },
+  "/admin/program-details": { title: "Program Details", subtitle: "Full program CRUD & management" },
+  "/admin/faculty": { title: "Faculty", subtitle: "Manage faculty profiles" },
+  "/admin/events": { title: "Events", subtitle: "Manage campus events & news" },
+  "/admin/testimonials": { title: "Testimonials", subtitle: "Graduate stories & ratings" },
+  "/admin/gallery": { title: "Gallery", subtitle: "Manage campus gallery photos" },
+  "/admin/admissions": { title: "Admissions", subtitle: "Campaign banner & CTAs" },
+  "/admin/facilities": { title: "Facilities", subtitle: "Campus facilities cards" },
+  "/admin/contact": { title: "Contact", subtitle: "Manage the contact section" },
+  "/admin/footer": { title: "Footer", subtitle: "Configure the footer" },
+  "/admin/site-settings": { title: "Site Settings", subtitle: "Global metadata & colors" },
+  "/admin/access-control": { title: "Access Control", subtitle: "Roles & permissions" },
+};
+
+interface TopbarProps {
+  onMenuClick: () => void;
+  onToggleSidebar?: () => void;
+}
+
+export default function Topbar({ onMenuClick, onToggleSidebar }: TopbarProps) {
+  const pathname = usePathname();
+  const router = useRouter();
+  const [showDropdown, setShowDropdown] = useState(false);
+  const meta = PAGE_META[pathname] ?? { title: "Dashboard", subtitle: "" };
+
+  const signOut = () => {
+    sessionStorage.removeItem(ADMIN_SESSION_KEY);
+    router.replace("/admin/login");
+  };
+
+  return (
+    <header className="h-16 bg-white border-b border-slate-200 flex items-center justify-between gap-2 px-3 sm:px-6 flex-shrink-0 sticky top-0 z-30">
+      {/* Left */}
+      <div className="flex items-center gap-2 min-w-0">
+        {/* Three-line (hamburger) toggle — collapses/expands sidebar on desktop */}
+        {onToggleSidebar && (
+          <button
+            onClick={onToggleSidebar}
+            title="Toggle sidebar"
+            className="hidden lg:flex flex-col items-center justify-center gap-[3px] p-2 rounded-none hover:bg-slate-100 transition-colors text-slate-600"
+          >
+            <span className="block w-5 h-[2px] bg-current rounded-none" />
+            <span className="block w-5 h-[2px] bg-current rounded-none" />
+            <span className="block w-5 h-[2px] bg-current rounded-none" />
+          </button>
+        )}
+        {/* Mobile menu (opens slide-out sidebar) */}
+        <button
+          onClick={onMenuClick}
+          className="lg:hidden p-2 rounded-none hover:bg-slate-100 transition-colors text-slate-600"
+        >
+          <Menu size={20} />
+        </button>
+        <div className="min-w-0">
+          <h1 className="text-base font-bold text-slate-900 leading-tight truncate">
+            {meta.title}
+          </h1>
+          <p className="text-xs text-slate-500 truncate hidden sm:block">
+            {meta.subtitle}
+          </p>
+        </div>
+      </div>
+
+      {/* Right */}
+      <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3 flex-shrink-0">
+        {/* Search */}
+        <div className="hidden md:flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-none px-3 py-2 w-32 lg:w-44">
+          <Search size={13} className="text-slate-400 shrink-0" />
+          <input
+            type="text"
+            placeholder="Search..."
+            className="bg-transparent text-sm outline-none w-full text-slate-700 placeholder:text-slate-400"
+          />
+        </div>
+
+        {/* View site */}
+        <Link
+          href="/"
+          target="_blank"
+          className="hidden sm:flex items-center gap-1.5 text-xs font-medium text-slate-600 hover:text-indigo-600 border border-slate-200 hover:border-indigo-500 px-3 py-2 rounded-none transition-colors"
+        >
+          <ExternalLink size={13} />
+          Site
+        </Link>
+
+        {/* Notifications */}
+        <button className="relative p-2 rounded-none hover:bg-slate-100 transition-colors">
+          <Bell size={18} className="text-slate-600" />
+          <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-indigo-600 rounded-full ring-2 ring-white" />
+        </button>
+
+        {/* User menu */}
+        <div className="relative">
+          <button
+            onClick={() => setShowDropdown(!showDropdown)}
+            className="flex items-center gap-2 hover:bg-slate-100 pl-1 pr-2 py-1.5 rounded-none transition-colors"
+          >
+            <div className="w-8 h-8 rounded-none bg-gradient-to-br from-indigo-600 to-blue-800 flex items-center justify-center text-white text-xs font-bold shrink-0">
+              NMC
+            </div>
+            <div className="hidden lg:block text-left">
+              <p className="text-xs font-semibold text-slate-800 leading-tight">
+                National Multiple College
+              </p>
+              <p className="text-[10px] text-slate-500">Super Admin</p>
+            </div>
+            <ChevronDown
+              size={13}
+              className={`text-slate-400 transition-transform ${showDropdown ? "rotate-180" : ""}`}
+            />
+          </button>
+
+          {showDropdown && (
+            <>
+              <div
+                className="fixed inset-0 z-10"
+                onClick={() => setShowDropdown(false)}
+              />
+              <div className="absolute right-0 mt-2 w-48 sm:w-52 bg-white rounded-none shadow-lg border border-slate-200 py-2 z-20">
+                <div className="px-4 py-2 border-b border-slate-100 mb-1">
+                  <p className="text-xs font-semibold text-slate-900">
+                    National Multiple College
+                  </p>
+                  <p className="text-[11px] text-slate-500">
+                    Affiliated to CTEVT
+                  </p>
+                </div>
+                <Link
+                  href="/"
+                  className="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors"
+                >
+                  <ExternalLink size={13} /> View Site
+                </Link>
+                <hr className="my-1 border-slate-100" />
+                <button
+                  onClick={signOut}
+                  className="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-500 hover:bg-red-50 transition-colors"
+                >
+                  <LogOut size={13} /> Sign Out
+                </button>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    </header>
+  );
+}

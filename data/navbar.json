@@ -1,0 +1,188 @@
+{
+  "brand": {
+    "logoText": "NMC",
+    "title": "National Multiple College",
+    "subtitle": "Affiliated to CTEVT",
+    "logoImage": "/uploads/navbar/1785416223209-34719876.jpg",
+    "logoSize": 48
+  },
+  "contact": {
+    "phone": "+977-984-1022268",
+    "email": "info@nmc.edu.np",
+    "phoneHref": "tel:+97701XXXXXXX",
+    "emailHref": "mailto:info@nmc.edu.np"
+  },
+  "ticker": {
+    "items": [
+      {
+        "id": "t1",
+        "text": "🎓  Admissions Open for 2081/82 — Limited Seats Available, Apply Now",
+        "enabled": true
+      },
+      {
+        "id": "t2",
+        "text": "🏆  Ranked Among the Top CTEVT-Affiliated Technical Colleges in Nepal",
+        "enabled": true
+      },
+      {
+        "id": "t3",
+        "text": "📚  Diploma Programs in Civil, Computer & Electrical Engineering",
+        "enabled": true
+      },
+      {
+        "id": "t4",
+        "text": "🌟  95%+ Graduate Placement Rate — 3,500+ Successful Alumni Nationwide",
+        "enabled": true
+      },
+      {
+        "id": "t5",
+        "text": "🔬  State-of-the-Art Labs & Industry-Standard Technical Training Facilities",
+        "enabled": true
+      },
+      {
+        "id": "t6",
+        "text": "📞  Enquire Now: +977-01-4XXXXXX  ·  info@nmc.edu.np",
+        "enabled": true
+      },
+      {
+        "id": "t7",
+        "text": "🎯  Scholarships Available for Meritorious & Economically Disadvantaged Students",
+        "enabled": true
+      },
+      {
+        "id": "t8",
+        "text": "🌐  Government Recognized · CTEVT Affiliated · ISO Certified Institution",
+        "enabled": true
+      }
+    ]
+  },
+  "socials": [
+    {
+      "id": "facebook",
+      "label": "Facebook",
+      "href": "https://facebook.com",
+      "hoverColor": "#1877F2",
+      "bgClass": "hover:bg-[#1877F2]",
+      "iconKey": "FaFacebookF",
+      "enabled": true
+    },
+    {
+      "id": "instagram",
+      "label": "Instagram",
+      "href": "https://instagram.com",
+      "hoverColor": "#E4405F",
+      "bgClass": "hover:bg-[#E4405F]",
+      "iconKey": "FaInstagram",
+      "enabled": true
+    },
+    {
+      "id": "youtube",
+      "label": "YouTube",
+      "href": "https://youtube.com",
+      "hoverColor": "#FF0000",
+      "bgClass": "hover:bg-[#FF0000]",
+      "iconKey": "FaYoutube",
+      "enabled": true
+    },
+    {
+      "id": "tiktok",
+      "label": "TikTok",
+      "href": "https://tiktok.com",
+      "hoverColor": "#ffffff",
+      "bgClass": "hover:bg-[#010101]",
+      "iconKey": "FaTiktok",
+      "enabled": true
+    },
+    {
+      "id": "whatsapp",
+      "label": "WhatsApp",
+      "href": "https://wa.me/977014000000",
+      "hoverColor": "#25D366",
+      "bgClass": "hover:bg-[#25D366]",
+      "iconKey": "FaWhatsapp",
+      "enabled": true
+    }
+  ],
+  "navLinks": [
+    {
+      "id": "about",
+      "label": "About",
+      "href": "#about",
+      "enabled": true,
+      "children": []
+    },
+    {
+      "id": "academics",
+      "label": "Academics",
+      "href": "#academics",
+      "enabled": true,
+      "children": [
+        {
+          "id": "ac-1",
+          "label": "Diploma Programs",
+          "href": "#programs",
+          "enabled": true
+        },
+        {
+          "id": "ac-2",
+          "label": "Certificate Programs",
+          "href": "#programs",
+          "enabled": true
+        },
+        {
+          "id": "ac-3",
+          "label": "Engineering Faculty",
+          "href": "#departments",
+          "enabled": true
+        },
+        {
+          "id": "ac-4",
+          "label": "IT & Computing",
+          "href": "#departments",
+          "enabled": true
+        },
+        {
+          "id": "ac-5",
+          "label": "Health Science",
+          "href": "#departments",
+          "enabled": true
+        }
+      ]
+    },
+    {
+      "id": "admissions",
+      "label": "Admissions",
+      "href": "#admissions",
+      "enabled": true,
+      "children": []
+    },
+    {
+      "id": "facilities",
+      "label": "Facilities",
+      "href": "#campus",
+      "enabled": true,
+      "children": []
+    },
+    {
+      "id": "events",
+      "label": "Events",
+      "href": "#events",
+      "enabled": true,
+      "children": []
+    },
+    {
+      "id": "contact",
+      "label": "Contact",
+      "href": "#contact",
+      "enabled": true,
+      "children": []
+    }
+  ],
+  "cta": {
+    "label": "Apply Now",
+    "href": "#admissions",
+    "enabled": true
+  },
+  "followLabel": "Follow Us",
+  "topbarSize": 48
+}
