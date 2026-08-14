@@ -6,9 +6,11 @@ import { useSession } from "next-auth/react";
 
 // ============================================================
 // Protected Route Guard for the Customer dashboard.
-// Redirects immediately to /login when there is no NextAuth
-// session cookie, or to /admin if a superadmin lands here.
-// Avoids a long "Verifying access" spinner when unauthenticated.
+// - If there is no NextAuth session cookie → redirect to /login
+//   immediately (no spinner).
+// - If a cookie exists, render children right away (no flash /
+//   flicker) and let useSession confirm the role; bounce
+//   cross-role users to their correct dashboard.
 // ============================================================
 
 function hasSessionCookie(): boolean {
@@ -22,11 +24,9 @@ function hasSessionCookie(): boolean {
 export default function RequireCustomerAuth({ children }: { children: ReactNode }) {
   const router = useRouter();
   const { data: session, status } = useSession();
-  const [allowed, setAllowed] = useState<boolean | null>(null);
   const [redirected, setRedirected] = useState(false);
 
-  // Synchronous cookie check: if there's no session token, go straight
-  // to /login without waiting for the async session fetch.
+  // Redundant guard for newly-created or expired sessions.
   useEffect(() => {
     if (!hasSessionCookie() && !redirected) {
       setRedirected(true);
@@ -34,32 +34,22 @@ export default function RequireCustomerAuth({ children }: { children: ReactNode 
     }
   }, [router, redirected]);
 
+  // Role enforcement once the session has resolved.
   useEffect(() => {
-    if (status === "loading") return;
-    if (status !== "authenticated" || !session?.user) {
-      if (!redirected) {
-        setRedirected(true);
-        router.replace("/login");
+    if (hasSessionCookie() && status === "authenticated" && session?.user) {
+      if (session.user.role !== "customer") {
+        router.replace("/admin");
+        return;
       }
-      return;
     }
-    if (session.user.role !== "customer") {
-      router.replace("/admin");
-      return;
-    }
-    setAllowed(true);
-  }, [status, session, router, redirected]);
+  }, [status, session, router]);
 
-  if (allowed === null) {
-    return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <div className="flex items-center gap-3 text-slate-500">
-          <span className="w-4 h-4 border-2 border-slate-300 border-t-indigo-600 rounded-full animate-spin" />
-          <span className="text-sm">Checking…</span>
-        </div>
-      </div>
-    );
+  // If a session cookie exists, render the dashboard immediately to
+  // avoid any flicker. Unauthenticated users were already redirected.
+  if (hasSessionCookie()) {
+    return <>{children}</>;
   }
 
-  return <>{children}</>;
+  // No cookie — render nothing (we already redirected to /login).
+  return null;
 }
